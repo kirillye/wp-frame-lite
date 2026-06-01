@@ -12,26 +12,49 @@
 ## Структура
 
 ```
+assets/
+  scss/
+    base/
+      _variables.scss     — цвета, шрифты, breakpoints
+      _reset.scss         — сброс стилей
+      _typography.scss    — типографика, ссылки, таблицы
+    components/
+      _buttons.scss
+      _forms.scss
+      _navigation.scss
+      _widgets.scss
+      _media.scss
+      _galleries.scss
+    layout/
+      _layout.scss        — .site, .container
+      _header.scss
+      _footer.scss
+      _posts.scss
+    utilities/
+      _accessibility.scss
+      _alignments.scss
+    main.scss             — точка входа, импортирует всё
+  js/
+    main.js               — точка входа JS
+  dist/                   — генерируется при сборке (в .gitignore)
 inc/
-  custom-header.php   — поддержка кастомного заголовка
-  customizer.php      — настройки кастомайзера
-  template-functions.php — вспомогательные функции
-  template-tags.php   — теги шаблона (дата, автор, рубрики)
-js/
-  navigation.js       — адаптивное меню
+  admin.php
+  login.php
+  security.php
+page-templates/
+  full-width.php          — страница без сайдбара
 template-parts/
-  content.php         — пост в списке/на странице
-  content-none.php    — заглушка «ничего не найдено»
-  content-page.php    — статическая страница
-  content-search.php  — результат поиска
+  content.php
+  content-none.php
+  content-page.php
 ```
 
 ## Разработка
 
 ```sh
 npm install
-npm run compile:css   # компиляция SASS → CSS
-npm run watch         # слежение за изменениями
+npm run dev    # следит за изменениями и пересобирает
+npm run build  # разовая продакшн-сборка
 ```
 
 ```sh

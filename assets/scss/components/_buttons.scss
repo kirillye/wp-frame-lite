@@ -1,0 +1,29 @@
+@use '../base/variables' as *;
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background: $color-primary;
+	border: none;
+	border-radius: $radius;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	line-height: $line-height;
+	padding: 0.55em 1.25em;
+	text-align: center;
+	text-decoration: none;
+	transition: background $transition;
+
+	&:hover {
+		background: $color-primary-hover;
+	}
+
+	&:focus {
+		outline: 2px solid $color-primary;
+		outline-offset: 2px;
+	}
+}

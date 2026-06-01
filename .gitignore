@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+assets/dist/
+
+# Composer
+vendor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE & Claude Code
+.vscode/
+.idea/
+.claude/
+
+# WordPress
+*.log
+style.css.map

@@ -1,0 +1,10 @@
+@use '../base/variables' as *;
+
+.site-footer {
+	background: $color-bg-alt;
+	border-top: 1px solid $color-border;
+	color: $color-muted;
+	font-size: $font-size-sm;
+	padding: 1.5rem 0;
+	text-align: center;
+}

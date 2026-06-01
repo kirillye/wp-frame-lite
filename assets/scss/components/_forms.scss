@@ -1,0 +1,53 @@
+@use '../base/variables' as *;
+
+input,
+select,
+optgroup,
+textarea,
+button {
+	font-family: inherit;
+	font-size: $font-size-base;
+	line-height: $line-height;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="color"],
+select,
+textarea {
+	background: $color-bg;
+	border: 1px solid $color-border-input;
+	border-radius: $radius;
+	color: $color-text;
+	padding: 0.5em 0.75em;
+	width: 100%;
+	transition: border-color $transition, box-shadow $transition;
+
+	&:focus {
+		border-color: $color-primary;
+		box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.15);
+		outline: none;
+	}
+}
+
+textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+label {
+	display: block;
+	font-size: $font-size-sm;
+	font-weight: 600;
+	margin-bottom: 0.3em;
+}

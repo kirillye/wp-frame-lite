@@ -1,0 +1,26 @@
+@use '../base/variables' as *;
+
+.gallery {
+	display: grid;
+	gap: 0.75em;
+	margin-bottom: 1.5em;
+}
+
+.gallery-item {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
+@for $i from 2 through 9 {
+	.gallery-columns-#{$i} {
+		grid-template-columns: repeat(#{$i}, 1fr);
+	}
+}
+
+.gallery-caption {
+	color: $color-muted;
+	display: block;
+	font-size: $font-size-xs;
+	margin-top: 0.3em;
+}

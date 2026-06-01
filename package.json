@@ -1,0 +1,22 @@
+{
+  "name": "wp-frame-lite",
+  "version": "1.0.0",
+  "description": "Стартовая WordPress-тема для клиентских проектов.",
+  "author": "Inveris <https://github.com/kirillye>",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "WordPress",
+    "Theme"
+  ],
+  "homepage": "https://github.com/kirillye",
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "bundle": "dir-archiver --src . --dest ../wp-frame-lite.zip --exclude .DS_Store .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json vite.config.js phpcs.xml.dist assets/scss assets/js"
+  },
+  "devDependencies": {
+    "dir-archiver": "^1.1.1",
+    "sass": "^1.77.0",
+    "vite": "^5.3.0"
+  }
+}

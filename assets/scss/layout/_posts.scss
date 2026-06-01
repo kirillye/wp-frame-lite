@@ -1,0 +1,73 @@
+@use '../base/variables' as *;
+
+.site-main {
+	padding: 2.5rem 0;
+}
+
+.entry-header {
+	margin-bottom: 1.5rem;
+}
+
+.entry-title {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+
+	a {
+		color: $color-heading;
+		text-decoration: none;
+
+		&:hover {
+			color: $color-primary;
+		}
+	}
+}
+
+.entry-meta {
+	color: $color-muted-alt;
+	font-size: $font-size-sm;
+	margin-bottom: 0.75rem;
+}
+
+.entry-content,
+.entry-summary {
+	margin-top: 1rem;
+}
+
+.entry-footer {
+	color: $color-muted-alt;
+	font-size: $font-size-sm;
+	margin-top: 1.5rem;
+}
+
+.post,
+.page {
+	margin-bottom: 2.5rem;
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+.page-links {
+	clear: both;
+	margin: 1em 0;
+}
+
+.posts-navigation,
+.post-navigation {
+	margin: 2em 0;
+
+	.nav-links {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.nav-previous {
+		flex: 1;
+	}
+
+	.nav-next {
+		flex: 1;
+		text-align: right;
+	}
+}

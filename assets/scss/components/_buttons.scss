@@ -1,5 +1,6 @@
 @use '../base/variables' as *;
 
+.btn,
 button,
 input[type="button"],
 input[type="reset"],
@@ -18,11 +19,13 @@ input[type="submit"] {
 	text-decoration: none;
 	transition: background $transition;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background: $color-primary-hover;
+		color: #fff;
 	}
 
-	&:focus {
+	&:focus-visible {
 		outline: 2px solid $color-primary;
 		outline-offset: 2px;
 	}

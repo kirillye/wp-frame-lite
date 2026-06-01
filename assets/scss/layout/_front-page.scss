@@ -1,0 +1,27 @@
+@use '../base/variables' as *;
+
+// Hero — тёмная акцентная секция
+.hero {
+	background: $color-dark;
+	color: $color-dark-text;
+	padding: 5rem 0;
+	text-align: center;
+}
+
+.hero-content {
+	margin: 0 auto;
+	max-width: 640px;
+}
+
+.hero-title {
+	color: $color-dark-text;
+	font-size: clamp(1.75rem, 4vw, 3rem);
+	line-height: 1.2;
+	margin: 0 0 1rem;
+}
+
+.hero-subtitle {
+	color: $color-dark-muted;
+	font-size: 1.125rem;
+	margin: 0 0 2rem;
+}

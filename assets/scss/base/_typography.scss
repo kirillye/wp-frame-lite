@@ -70,13 +70,14 @@ pre code {
 }
 
 abbr[title] {
-  border-bottom: 1px dotted #999;
+  border-bottom: 1px dotted $color-muted-alt;
   cursor: help;
   text-decoration: none;
 }
 
 mark {
-  background: #fff3cd;
+  background: rgba(243, 103, 48, 0.12);
+  color: $color-text;
   padding: 0.1em 0.2em;
 }
 

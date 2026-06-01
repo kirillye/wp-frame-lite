@@ -1,10 +1,64 @@
 @use '../base/variables' as *;
 
+// Footer — тёмная секция (8% от страницы)
 .site-footer {
-	background: $color-bg-alt;
-	border-top: 1px solid $color-border;
-	color: $color-muted;
+	background: $color-dark;
+	color: $color-dark-muted;
 	font-size: $font-size-sm;
-	padding: 1.5rem 0;
+	padding: 3rem 0 1.5rem;
+}
+
+.footer-widgets {
+	border-bottom: 1px solid $color-dark-line;
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	margin-bottom: 2rem;
+	padding-bottom: 2rem;
+}
+
+.footer-col {
+	&__title {
+		color: $color-dark-text;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		margin: 0 0 0.75rem;
+	}
+
+	&__desc {
+		margin: 0;
+	}
+
+	p {
+		margin: 0 0 0.5rem;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li + li {
+			margin-top: 0.35rem;
+		}
+	}
+
+	a {
+		color: $color-dark-muted;
+		text-decoration: none;
+		transition: color $transition;
+
+		&:hover {
+			color: $color-primary;
+		}
+	}
+}
+
+.footer-bottom {
 	text-align: center;
+}
+
+.site-info {
+	color: $color-dark-muted;
+	margin: 0;
 }

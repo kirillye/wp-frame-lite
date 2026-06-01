@@ -1,10 +1,69 @@
 @use '../base/variables' as *;
 
-.main-navigation {
+// ── Burger button ─────────────────────────────────────────────────────────────
+
+.menu-toggle {
+	align-items: center;
+	background: none;
+	border: none;
+	box-shadow: none;
+	cursor: pointer;
+	display: none;       // показывается только на мобильных (см. ниже)
+	flex-direction: column;
+	gap: 5px;
+	outline-offset: 4px;
+	padding: 6px 4px;
+
+	&:hover .burger-line {
+		background: $color-primary;
+	}
+
+	@media (max-width: #{$bp-sm - 1px}) {
+		display: flex;
+	}
+}
+
+.burger-line {
+	background: $color-text;
+	border-radius: 2px;
 	display: block;
+	height: 2px;
+	transition: transform 0.25s ease, opacity 0.2s ease, background 0.15s ease;
+	width: 22px;
+}
+
+.nav-open .burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-open .burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-open .burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+// ── Overlay — перекрывает ВСЁ включая header ──────────────────────────────────
+
+.nav-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	transition: opacity 0.3s ease;
+	z-index: 300;   // выше header (250)
+}
+
+.nav-open .nav-overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+// ── Десктопная навигация (только от $bp-sm) ───────────────────────────────────
+
+.main-navigation {
+	@media (max-width: #{$bp-sm - 1px}) {
+		display: none;  // на мобильных скрыта — используется mobile-sidebar
+	}
 
 	ul {
-		display: none;
+		align-items: center;
+		display: flex;
+		gap: 0.25rem;
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -22,20 +81,13 @@
 		}
 
 		li:hover > ul,
-		li.focus > ul {
-			left: 0;
-		}
+		li.focus > ul { left: 0; }
 
 		ul li:hover > ul,
-		ul li.focus > ul {
-			left: 100%;
-			top: 0;
-		}
+		ul li.focus > ul { left: 100%; top: 0; }
 	}
 
-	li {
-		position: relative;
-	}
+	li { position: relative; }
 
 	a {
 		color: $color-text;
@@ -45,37 +97,110 @@
 		text-decoration: none;
 		transition: color $transition;
 
+		&:hover { color: $color-primary; }
+	}
+}
+
+// ── Мобильный сайдбар — отдельный элемент вне header ─────────────────────────
+
+.mobile-sidebar {
+	background: $color-bg;
+	box-shadow: -4px 0 32px rgba(0, 0, 0, 0.12);
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	max-width: 320px;
+	overflow-y: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transform: translateX(110%);
+	transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+	width: 85vw;
+	z-index: 400;   // выше overlay (300) и header (250)
+
+	@media (min-width: $bp-sm) {
+		display: none;  // на десктопе не нужен
+	}
+}
+
+.nav-open .mobile-sidebar {
+	transform: translateX(0);
+}
+
+// Шапка сайдбара
+.mobile-sidebar__head {
+	align-items: center;
+	border-bottom: 1px solid $color-border;
+	display: flex;
+	flex-shrink: 0;
+	justify-content: space-between;
+	padding: 1rem 1.25rem;
+}
+
+.mobile-sidebar__brand {
+	font-size: 1rem;
+	font-weight: 700;
+
+	a {
+		color: $color-heading;
+		text-decoration: none;
+	}
+}
+
+// Кнопка закрытия
+.nav-close {
+	background: none;
+	border: none;
+	box-shadow: none;
+	color: $color-muted;
+	cursor: pointer;
+	font-size: 1.5rem;
+	line-height: 1;
+	padding: 4px 6px;
+	transition: color $transition;
+
+	&:hover,
+	&:focus {
+		background: none;
+		color: $color-primary;
+	}
+}
+
+// Навигация внутри сайдбара
+.mobile-sidebar__nav {
+	flex: 1;
+	padding: 0.75rem 0;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		color: $color-text;
+		display: block;
+		font-size: 1rem;
+		font-weight: 500;
+		padding: 0.75rem 1.25rem;
+		text-decoration: none;
+		transition: color $transition, background $transition;
+
 		&:hover {
+			background: $color-bg-alt;
 			color: $color-primary;
 		}
 	}
 
-	ul ul a {
-		padding: 0.5em 1em;
-	}
-
-	&.toggled ul {
-		display: block;
-	}
-
-	@media (min-width: $bp-sm) {
-		ul {
-			align-items: center;
-			display: flex;
-			gap: 0.25rem;
-		}
+	li + li {
+		border-top: 1px solid $color-border;
 	}
 }
 
-.menu-toggle {
-	background: none;
-	border: 1px solid $color-border-input;
-	border-radius: $radius;
-	color: $color-text;
-	font-size: $font-size-sm;
-	padding: 0.4em 0.75em;
-
-	@media (min-width: $bp-sm) {
-		display: none;
-	}
+// Футер сайдбара (телефон, соц. сети и т.д.)
+.mobile-sidebar__footer {
+	border-top: 1px solid $color-border;
+	flex-shrink: 0;
+	padding: 1.25rem;
 }

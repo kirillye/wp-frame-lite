@@ -2,10 +2,6 @@
 /**
  * The header for our theme
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
  * @package wp-frame-lite
  */
 
@@ -26,34 +22,73 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'wp-frame-lite' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$wp_frame_lite_description = get_bloginfo( 'description', 'display' );
-			if ( $wp_frame_lite_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $wp_frame_lite_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+		<div class="container">
+			<div class="header-inner">
+				<div class="site-branding">
+					<?php
+					the_custom_logo();
+					if ( is_front_page() && is_home() ) :
+						?>
+						<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+						<?php
+					else :
+						?>
+						<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+						<?php
+					endif;
+					$wp_frame_lite_description = get_bloginfo( 'description', 'display' );
+					if ( $wp_frame_lite_description || is_customize_preview() ) :
+						?>
+						<p class="site-description"><?php echo $wp_frame_lite_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<?php endif; ?>
+				</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'wp-frame-lite' ); ?></button>
+				<!-- Десктопная навигация (скрыта на мобильных) -->
+				<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Основная навигация', 'wp-frame-lite' ); ?>">
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-1',
+							'menu_id'        => 'primary-menu',
+						)
+					);
+					?>
+				</nav><!-- #site-navigation -->
+
+				<!-- Кнопка бургера (только на мобильных) -->
+				<button class="menu-toggle" aria-controls="mobile-sidebar" aria-expanded="false" aria-label="<?php esc_attr_e( 'Открыть меню', 'wp-frame-lite' ); ?>">
+					<span class="burger-line"></span>
+					<span class="burger-line"></span>
+					<span class="burger-line"></span>
+				</button>
+			</div><!-- .header-inner -->
+		</div><!-- .container -->
+	</header><!-- #masthead -->
+
+	<!-- Мобильный сайдбар — вне header, имеет собственный z-index выше overlay -->
+	<aside id="mobile-sidebar" class="mobile-sidebar" aria-hidden="true" aria-label="<?php esc_attr_e( 'Мобильное меню', 'wp-frame-lite' ); ?>">
+		<div class="mobile-sidebar__head">
+			<span class="mobile-sidebar__brand">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
+			</span>
+			<button class="nav-close" aria-label="<?php esc_attr_e( 'Закрыть меню', 'wp-frame-lite' ); ?>">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div><!-- .mobile-sidebar__head -->
+
+		<nav class="mobile-sidebar__nav" aria-label="<?php esc_attr_e( 'Мобильная навигация', 'wp-frame-lite' ); ?>">
 			<?php
 			wp_nav_menu(
 				array(
 					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
+					'menu_id'        => 'mobile-menu',
+					'container'      => false,
 				)
 			);
 			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		</nav><!-- .mobile-sidebar__nav -->
+
+		<!-- Здесь можно добавить телефон, соц. сети и другие данные -->
+		<div class="mobile-sidebar__footer">
+		</div><!-- .mobile-sidebar__footer -->
+	</aside><!-- #mobile-sidebar -->

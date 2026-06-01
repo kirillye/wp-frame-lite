@@ -33,9 +33,13 @@ textarea {
 	width: 100%;
 	transition: border-color $transition, box-shadow $transition;
 
+	&::placeholder {
+		color: $color-muted-alt;
+	}
+
 	&:focus {
 		border-color: $color-primary;
-		box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.15);
+		box-shadow: 0 0 0 2px rgba(243, 103, 48, 0.20);
 		outline: none;
 	}
 }

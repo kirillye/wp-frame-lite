@@ -5,50 +5,63 @@
  * @package wp-frame-lite
  */
 
-// Фронтенд: показать PHP-файл шаблона который рендерит текущую страницу.
-add_action( 'admin_bar_menu', function ( $wp_admin_bar ) {
-	if ( is_admin() || ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+defined( 'ABSPATH' ) || exit;
 
-	global $template;
-	if ( empty( $template ) ) {
-		return;
-	}
+add_action(
+	'admin_bar_menu',
+	function ( WP_Admin_Bar $wp_admin_bar ): void {
+		if ( is_admin() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-	$name = basename( $template );
+		global $template;
 
-	$wp_admin_bar->add_node( array(
-		'id'    => 'wp-frame-template',
-		'title' => '&#11042; Шаблон страницы: ' . esc_html( $name ),
-		'meta'  => array( 'title' => 'Шаблон страницы: ' . $name ),
-	) );
-}, 100 );
+		if ( empty( $template ) ) {
+			return;
+		}
 
-// Админка: показать page template при редактировании поста/страницы.
-add_action( 'admin_bar_menu', function ( $wp_admin_bar ) {
-	if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
-		return;
-	}
+		$name = basename( $template );
 
-	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-	if ( ! $screen || 'post' !== $screen->base ) {
-		return;
-	}
+		$wp_admin_bar->add_node(
+			array(
+				'id'    => 'wp-frame-template',
+				'title' => 'Шаблон страницы: ' . esc_html( $name ),
+				'meta'  => array( 'title' => 'Шаблон страницы: ' . esc_attr( $name ) ),
+			)
+		);
+	},
+	100
+);
 
-	$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
-	if ( ! $post_id ) {
-		return;
-	}
+add_action(
+	'admin_bar_menu',
+	function ( WP_Admin_Bar $wp_admin_bar ): void {
+		if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
-	$tpl   = get_post_meta( $post_id, '_wp_page_template', true ) ?: 'default';
-	$label = ( 'default' === $tpl )
-		? __( '(по умолчанию)', 'wp-frame-lite' )
-		: esc_html( $tpl );
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
-	$wp_admin_bar->add_node( array(
-		'id'    => 'wp-frame-template',
-		'title' => '&#9670; ' . $label,
-		'meta'  => array( 'title' => 'Шаблон: ' . $label ),
-	) );
-}, 100 );
+		if ( ! $screen || 'post' !== $screen->base ) {
+			return;
+		}
+
+		$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( ! $post_id ) {
+			return;
+		}
+
+		$template = get_post_meta( $post_id, '_wp_page_template', true ) ?: 'default';
+		$label    = 'default' === $template ? __( '(по умолчанию)', 'wp-frame-lite' ) : $template;
+
+		$wp_admin_bar->add_node(
+			array(
+				'id'    => 'wp-frame-template',
+				'title' => 'Шаблон: ' . esc_html( $label ),
+				'meta'  => array( 'title' => 'Шаблон: ' . esc_attr( $label ) ),
+			)
+		);
+	},
+	100
+);

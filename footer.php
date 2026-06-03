@@ -1,10 +1,6 @@
 <?php
 /**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * Footer template.
  *
  * @package wp-frame-lite
  */
@@ -15,14 +11,15 @@
 		<div class="container">
 			<div class="footer-widgets">
 				<div class="footer-col">
-					<h3 class="footer-col__title"><?php bloginfo( 'name' ); ?></h3>
+					<h3 class="footer-col__title"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></h3>
 					<?php
 					$footer_description = get_bloginfo( 'description', 'display' );
+
 					if ( $footer_description ) :
 						?>
 						<p class="footer-col__desc"><?php echo esc_html( $footer_description ); ?></p>
 					<?php endif; ?>
-				</div><!-- .footer-col -->
+				</div>
 
 				<div class="footer-col">
 					<h3 class="footer-col__title"><?php esc_html_e( 'Навигация', 'wp-frame-lite' ); ?></h3>
@@ -36,22 +33,22 @@
 						)
 					);
 					?>
-				</div><!-- .footer-col -->
+				</div>
 
 				<div class="footer-col">
 					<h3 class="footer-col__title"><?php esc_html_e( 'Контакты', 'wp-frame-lite' ); ?></h3>
 					<p><?php esc_html_e( 'Есть вопросы? Свяжитесь с нами.', 'wp-frame-lite' ); ?></p>
-				</div><!-- .footer-col -->
-			</div><!-- .footer-widgets -->
+				</div>
+			</div>
 
 			<div class="footer-bottom">
 				<p class="site-info">
-					&copy; <?php echo esc_html( date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'Все права защищены.', 'wp-frame-lite' ); ?>
+					&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( get_bloginfo( 'name' ) ); ?>. <?php esc_html_e( 'Все права защищены.', 'wp-frame-lite' ); ?>
 				</p>
-			</div><!-- .footer-bottom -->
-		</div><!-- .container -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+			</div>
+		</div>
+	</footer>
+</div>
 
 <?php wp_footer(); ?>
 

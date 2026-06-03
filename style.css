@@ -2,12 +2,12 @@
 Theme Name: wp-frame-lite
 Author: Inveris
 Author URI: https://github.com/kirillye
-Description: Стартовая тема для сайтов на WordPress. Поддержка ACF и Yoast SEO.
+Description: Стартовая тема для кастомных клиентских сайтов на WordPress. ACF JSON обязателен.
 Version: 1.0.0
 Requires at least: 6.0
 Requires PHP: 8.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: wp-frame-lite
-Tags: custom-background, custom-logo, custom-menu, featured-images, translation-ready
+Tags: custom-logo, custom-menu, featured-images
 */

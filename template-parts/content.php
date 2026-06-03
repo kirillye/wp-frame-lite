@@ -57,11 +57,11 @@
 		if ( 'post' === get_post_type() ) {
 			$categories_list = get_the_category_list( ', ' );
 			if ( $categories_list ) {
-				printf( '<span class="cat-links">%s</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<span class="cat-links">%s</span>', wp_kses_post( $categories_list ) );
 			}
 			$tags_list = get_the_tag_list( '', ', ' );
 			if ( $tags_list ) {
-				printf( '<span class="tags-links">%s</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				printf( '<span class="tags-links">%s</span>', wp_kses_post( $tags_list ) );
 			}
 		}
 		edit_post_link(

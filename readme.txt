@@ -6,7 +6,7 @@ Tags: custom-logo, custom-menu, featured-images
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GNU General Public License v2 or later
 License URI: LICENSE
 
@@ -17,6 +17,19 @@ License URI: LICENSE
 Тема использует ACF PRO и ACF JSON как обязательную часть разработки. Комментарии и поиск отключены полностью, тема одноязычная. SEO-плагины не являются обязательными зависимостями.
 
 == Changelog ==
+
+= 1.3.0 =
+* Подключены Swiper 11 и GLightbox 3 — по требованию, через wp_frame_lite_use()
+* main.js разбит на модули, инициализация отложена до DOMContentLoaded
+* Перечисление авторов закрыто полностью: REST /wp/v2/users и author в oEmbed
+* Добавлены заголовки X-Frame-Options, Referrer-Policy, Permissions-Policy и
+  X-Content-Type-Options, набор фильтруется
+* Тема уважает prefers-reduced-motion, включая слайдер
+* Все обработчики хуков переведены с замыканий на именованные функции
+* Добавлен CI: линтеры, WPCS и проверка, что assets/dist не разошёлся с исходниками
+* Исправлен санитайзер SVG: удаление узлов из живого DOMNodeList пропускало
+  каждый второй, добавлена чистка javascript: в href, убран нерабочий svgz
+* Исправлено правило gitignore, прятавшее assets/vendor вместе с vendor Composer
 
 = 1.2.0 =
 * SCSS убран, стили переведены на обычный CSS с прежней структурой слоёв

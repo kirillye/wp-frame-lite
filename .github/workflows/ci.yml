@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  frontend:
+    name: Фронтенд
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: stylelint
+        run: npm run lint:css
+
+      - name: Prettier
+        run: npm run format:check
+
+      # Главное здесь. assets/dist коммитится в репозиторий, потому что тема
+      # ставится на хостинг без Node. Плата за это — риск закоммитить исходники,
+      # забыв пересобрать: на прод уедет старая сборка, и заметят это не сразу.
+      #
+      # Пересобираем и сверяем с тем, что лежит в репозитории.
+      #
+      # Сверяются только main.css и main.js — собственно результат сборки. Их
+      # преджатые двойники .br/.gz не проверяются: brotli зависит от версии
+      # zlib в Node, и на другой версии байты разойдутся без реальной причины.
+      # Шаг images тоже пропущен: он инкрементален по mtime, а в свежем
+      # checkout все файлы получают одинаковое время.
+      - name: Сборка совпадает с закоммиченной
+        run: |
+          npx vite build
+          if ! git diff --exit-code -- assets/dist/css/main.css assets/dist/js/main.js; then
+            echo "::error::assets/dist разошёлся с исходниками. Выполните npm run build и закоммитьте результат."
+            exit 1
+          fi
+
+  php:
+    name: PHP
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          coverage: none
+          tools: composer
+
+      - name: Установка зависимостей
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Проверка синтаксиса
+        run: composer lint:php
+
+      - name: WordPress Coding Standards
+        run: composer lint:wpcs

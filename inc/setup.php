@@ -49,13 +49,17 @@ function wp_frame_lite_content_width(): void {
 }
 add_action( 'after_setup_theme', 'wp_frame_lite_content_width', 0 );
 
-add_filter(
-	'body_class',
-	function ( array $classes ): array {
-		if ( ! is_singular() ) {
-			$classes[] = 'hfeed';
-		}
-
-		return $classes;
+/**
+ * Добавляет hfeed на страницах со списками записей.
+ *
+ * @param array<int, string> $classes Классы body.
+ * @return array<int, string>
+ */
+function wp_frame_lite_body_classes( array $classes ): array {
+	if ( ! is_singular() ) {
+		$classes[] = 'hfeed';
 	}
-);
+
+	return $classes;
+}
+add_filter( 'body_class', 'wp_frame_lite_body_classes' );

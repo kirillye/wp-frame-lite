@@ -29,3 +29,4 @@
 /* Utilities */
 @import "./utilities/accessibility.css";
 @import "./utilities/alignments.css";
+@import "./utilities/motion.css";

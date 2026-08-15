@@ -9,44 +9,50 @@ defined( 'ABSPATH' ) || exit;
 
 const WP_FRAME_LITE_ACF_JSON_DIR = '/acf-json';
 
-add_action(
-	'admin_notices',
-	function (): void {
-		if ( ! current_user_can( 'activate_plugins' ) ) {
-			return;
-		}
-
-		if ( ! function_exists( 'acf' ) && ! class_exists( 'ACF' ) ) {
-			echo '<div class="notice notice-error"><p>';
-			echo esc_html( 'Для темы wp-frame-lite обязателен плагин Advanced Custom Fields PRO.' );
-			echo '</p></div>';
-
-			return;
-		}
-
-		if ( ! function_exists( 'acf_add_options_page' ) ) {
-			echo '<div class="notice notice-warning"><p>';
-			echo esc_html( 'Установлена бесплатная версия ACF: страница «Настройки сайта» недоступна. Нужна ACF PRO.' );
-			echo '</p></div>';
-		}
+/**
+ * Предупреждает администратора, если ACF отсутствует или стоит бесплатная версия.
+ */
+function wp_frame_lite_acf_admin_notice(): void {
+	if ( ! current_user_can( 'activate_plugins' ) ) {
+		return;
 	}
-);
 
-add_filter(
-	'acf/settings/save_json',
-	function (): string {
-		return get_template_directory() . WP_FRAME_LITE_ACF_JSON_DIR;
+	if ( ! function_exists( 'acf' ) && ! class_exists( 'ACF' ) ) {
+		echo '<div class="notice notice-error"><p>';
+		echo esc_html( 'Для темы wp-frame-lite обязателен плагин Advanced Custom Fields PRO.' );
+		echo '</p></div>';
+
+		return;
 	}
-);
 
-add_filter(
-	'acf/settings/load_json',
-	function ( array $paths ): array {
-		$paths[] = get_template_directory() . WP_FRAME_LITE_ACF_JSON_DIR;
-
-		return array_values( array_unique( $paths ) );
+	if ( ! function_exists( 'acf_add_options_page' ) ) {
+		echo '<div class="notice notice-warning"><p>';
+		echo esc_html( 'Установлена бесплатная версия ACF: страница «Настройки сайта» недоступна. Нужна ACF PRO.' );
+		echo '</p></div>';
 	}
-);
+}
+add_action( 'admin_notices', 'wp_frame_lite_acf_admin_notice' );
+
+/**
+ * Куда ACF сохраняет JSON групп полей.
+ */
+function wp_frame_lite_acf_save_json_path(): string {
+	return get_template_directory() . WP_FRAME_LITE_ACF_JSON_DIR;
+}
+add_filter( 'acf/settings/save_json', 'wp_frame_lite_acf_save_json_path' );
+
+/**
+ * Откуда ACF их читает.
+ *
+ * @param array<int, string> $paths Пути загрузки.
+ * @return array<int, string>
+ */
+function wp_frame_lite_acf_load_json_paths( array $paths ): array {
+	$paths[] = get_template_directory() . WP_FRAME_LITE_ACF_JSON_DIR;
+
+	return array_values( array_unique( $paths ) );
+}
+add_filter( 'acf/settings/load_json', 'wp_frame_lite_acf_load_json_paths' );
 
 /**
  * Получить ACF option field с fallback-значением.

@@ -71,6 +71,14 @@ export function initSliders() {
 
 		const config = { ...DEFAULTS, ...options };
 
+		// Swiper двигает слайды через JS-трансформации, поэтому CSS-правило
+		// prefers-reduced-motion его не останавливает: гасим переход и
+		// автопрокрутку здесь.
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			config.speed = 0;
+			config.autoplay = false;
+		}
+
 		const next = own('.swiper-button-next');
 		const prev = own('.swiper-button-prev');
 		const pagination = own('.swiper-pagination');

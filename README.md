@@ -291,13 +291,13 @@ Apache — в `.htaccess` сайта (не темы):
 
 Зоны ответственности разведены, чтобы инструменты не переписывали файлы друг за другом:
 
-| Что                        | Чем                                       |
-| -------------------------- | ----------------------------------------- |
-| Форматирование PHP         | DEVSENSE PHP Tools, пресет WordPress      |
-| Анализ PHP                 | Intelephense + стабы WordPress            |
-| Форматирование CSS, JS, MD | Prettier                                  |
-| Качество CSS               | stylelint (`@wordpress/stylelint-config`) |
-| Отступы, EOL               | `.editorconfig`                           |
+| Что                        | Чем                                     |
+| -------------------------- | --------------------------------------- |
+| Форматирование PHP         | DEVSENSE PHP Tools, пресет WordPress    |
+| Анализ PHP                 | Intelephense + стабы WordPress          |
+| Форматирование CSS, JS, MD | Prettier                                |
+| Качество CSS               | stylelint (`stylelint-config-standard`) |
+| Отступы, EOL               | `.editorconfig`                         |
 
 ```sh
 npm run lint:css        # проверить CSS
@@ -307,6 +307,13 @@ npm run format:check    # проверить без записи
 ```
 
 Stylelint форматированием не занимается: правила `*-empty-line-before` в `.stylelintrc.json` отключены намеренно — они конфликтуют с Prettier за пустые строки после `{`.
+
+Ещё два правила выключены осознанно:
+
+- `import-notation` — конфиг по умолчанию требует `@import url("x.css")`, тема использует более современную запись строкой;
+- `media-feature-range-notation` — конфиг требует `(width < 992px)` вместо `(max-width: 991.98px)`. Запись читается лучше, но не понимается Safari до 16.4 и Chrome до 104: там медиазапрос был бы проигнорирован целиком и на старом телефоне развернулось бы десктопное меню. Оставлена совместимая форма.
+
+Изначально брался `@wordpress/stylelint-config`, но в 24-й версии он тянет `@wordpress/theme`, а тот — React, react-dom и часть пакетов Гутенберга. Для конфига линтера CSS это 58 лишних пакетов и постоянные предупреждения npm про peer-зависимости React, поэтому заменён на `stylelint-config-standard`.
 
 ### Настройка редактора
 

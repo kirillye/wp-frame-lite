@@ -9,7 +9,9 @@ node_modules/
 assets/dist/**/*.map
 
 # Composer
-vendor/
+# Ведущий слеш обязателен: без него шаблон применяется на любой глубине
+# и вместе с зависимостями Composer прячет assets/vendor со Swiper и GLightbox.
+/vendor/
 
 # OS
 .DS_Store

@@ -1,0 +1,30 @@
+/*
+ * Точка входа стилей.
+ *
+ * Порядок импортов = порядок каскада, менять осознанно.
+ * Vite инлайнит все @import на этапе сборки — в assets/dist/css/main.css
+ * попадает один файл без сетевых запросов.
+ */
+
+/* Base */
+@import "./base/variables.css";
+@import "./base/reset.css";
+@import "./base/typography.css";
+
+/* Layout */
+@import "./layout/layout.css";
+@import "./layout/header.css";
+@import "./layout/footer.css";
+@import "./layout/front-page.css";
+@import "./layout/posts.css";
+
+/* Components */
+@import "./components/buttons.css";
+@import "./components/forms.css";
+@import "./components/navigation.css";
+@import "./components/media.css";
+@import "./components/galleries.css";
+
+/* Utilities */
+@import "./utilities/accessibility.css";
+@import "./utilities/alignments.css";

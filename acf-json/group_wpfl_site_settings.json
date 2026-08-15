@@ -1,0 +1,321 @@
+{
+    "key": "group_wpfl_site_settings",
+    "title": "Настройки сайта",
+    "fields": [
+        {
+            "key": "field_wpfl_tab_contacts",
+            "label": "Контакты",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_wpfl_contact_phones",
+            "label": "Телефоны",
+            "name": "contact_phones",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Первый номер считается основным.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Добавить телефон",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_wpfl_phone_number",
+                    "label": "Номер",
+                    "name": "phone_number",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "+7 (495) 000-00-00",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_wpfl_contact_phones"
+                },
+                {
+                    "key": "field_wpfl_phone_label",
+                    "label": "Подпись",
+                    "name": "phone_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Отдел продаж",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_wpfl_contact_phones"
+                }
+            ]
+        },
+        {
+            "key": "field_wpfl_contact_email",
+            "label": "E-mail",
+            "name": "contact_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "info@example.com",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_wpfl_contact_schedule",
+            "label": "Режим работы",
+            "name": "contact_schedule",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "Пн–Пт, 9:00–18:00",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_wpfl_contact_address",
+            "label": "Адрес",
+            "name": "contact_address",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "г. Москва, ул. Примерная, д. 1, офис 100",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_wpfl_contact_map",
+            "label": "Ссылка на карту",
+            "name": "contact_map_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Ссылка на точку в Яндекс.Картах или Google Maps.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https://yandex.ru/maps/..."
+        },
+        {
+            "key": "field_wpfl_tab_social",
+            "label": "Соцсети",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_wpfl_social_links",
+            "label": "Ссылки",
+            "name": "social_links",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Добавить соцсеть",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_wpfl_social_title",
+                    "label": "Название",
+                    "name": "social_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "40",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "Telegram",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_wpfl_social_links"
+                },
+                {
+                    "key": "field_wpfl_social_url",
+                    "label": "Ссылка",
+                    "name": "social_url",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "60",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "https://t.me/example",
+                    "parent_repeater": "field_wpfl_social_links"
+                }
+            ]
+        },
+        {
+            "key": "field_wpfl_tab_footer",
+            "label": "Подвал",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_wpfl_footer_copyright",
+            "label": "Копирайт",
+            "name": "footer_copyright",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Если не заполнено, подставляется «© {год} {название сайта}. Все права защищены.»",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_wpfl_footer_legal",
+            "label": "Реквизиты",
+            "name": "footer_legal",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "ИНН, ОГРН, юридическое лицо — если нужно выводить в подвале.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "wp-frame-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Базовые контакты и данные подвала. Часть темы wp-frame-lite.",
+    "show_in_rest": 0,
+    "modified": 1786752000
+}

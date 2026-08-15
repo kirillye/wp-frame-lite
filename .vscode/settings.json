@@ -1,0 +1,155 @@
+{
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": false,
+  "editor.detectIndentation": false,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // ── PHP ────────────────────────────────────────────────────────────────────
+  // В системе обычно стоит несколько PHP-расширений, каждое лезет и форматировать,
+  // и анализировать. Роли разведены явно, иначе получаются дублирующиеся
+  // подчёркивания и вопрос «каким форматтером сохранять?» на каждом Ctrl+S.
+  //
+  //   DEVSENSE PHP Tools — форматирование (умеет смесь PHP и HTML в шаблонах)
+  //   Intelephense       — анализ и автодополнение
+
+  "[php]": {
+    "editor.defaultFormatter": "DEVSENSE.phptools-vscode"
+  },
+  "php.format.codeStyle": "WordPress",
+  "php.format.rules.alignConsecutiveAssignments": true,
+  "php.format.rules.alignConstants": true,
+  "php.format.rules.arrayInitializersAlignKeyValuePairs": true,
+  "php.format.rules.endWithNewLine": true,
+
+  // DEVSENSE не показывает проблемы — их показывает Intelephense.
+  "php.problems.scope": "none",
+
+  // Intelephense не форматирует — форматирует DEVSENSE.
+  "intelephense.format.enable": false,
+
+  // Ключевое: стаб "wordpress" в конце списка. Без него core-функции
+  // (get_bloginfo, esc_html, wp_nav_menu, add_action …) подчёркиваются как
+  // неизвестные. Массив ЗАМЕЩАЕТ значение по умолчанию, поэтому перечислены
+  // все штатные стабы — при добавлении своих дописывайте в конец, ничего не удаляя.
+  "intelephense.stubs": [
+    "apache",
+    "bcmath",
+    "bz2",
+    "calendar",
+    "com_dotnet",
+    "Core",
+    "ctype",
+    "curl",
+    "date",
+    "dba",
+    "dom",
+    "enchant",
+    "exif",
+    "FFI",
+    "fileinfo",
+    "filter",
+    "fpm",
+    "ftp",
+    "gd",
+    "gettext",
+    "gmp",
+    "hash",
+    "iconv",
+    "imap",
+    "intl",
+    "json",
+    "ldap",
+    "libxml",
+    "mbstring",
+    "meta",
+    "mysqli",
+    "oci8",
+    "odbc",
+    "openssl",
+    "pcntl",
+    "pcre",
+    "PDO",
+    "pgsql",
+    "Phar",
+    "posix",
+    "pspell",
+    "random",
+    "readline",
+    "Reflection",
+    "session",
+    "shmop",
+    "SimpleXML",
+    "snmp",
+    "soap",
+    "sockets",
+    "sodium",
+    "SPL",
+    "sqlite3",
+    "standard",
+    "superglobals",
+    "sysvmsg",
+    "sysvsem",
+    "sysvshm",
+    "tidy",
+    "tokenizer",
+    "uri",
+    "xml",
+    "xmlreader",
+    "xmlrpc",
+    "xmlwriter",
+    "xsl",
+    "Zend OPcache",
+    "zip",
+    "zlib",
+    "wordpress"
+  ],
+
+  // Тема заявляет Requires PHP: 8.0 — пусть анализатор ловит случайный 8.1+ синтаксис.
+  "intelephense.environment.phpVersion": "8.0.0",
+
+  // ACF-функции ядром не покрываются: get_field/the_field резолвятся, только если
+  // плагин виден анализатору. Путь относительный от корня воркспейса (папки темы).
+  "intelephense.environment.includePaths": ["../../plugins/advanced-custom-fields-pro"],
+
+  // Встроенные подсказки VS Code для PHP только мешают языковому серверу.
+  "php.suggest.basic": false,
+
+  // ── CSS ────────────────────────────────────────────────────────────────────
+  // Та же логика, что и в PHP: Prettier форматирует, stylelint проверяет качество.
+  // Правила *-empty-line-before в .stylelintrc.json отключены — иначе
+  // stylelint и Prettier перетягивали бы пустые строки друг у друга.
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  },
+  "stylelint.validate": ["css"],
+  "css.validate": false,
+
+  // ── Остальное ──────────────────────────────────────────────────────────────
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+
+  "files.associations": {
+    "*.php": "php"
+  }
+}

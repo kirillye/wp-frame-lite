@@ -4,6 +4,7 @@
  *
  * @package wp-frame-lite
  */
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -23,7 +24,7 @@
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Страницы:', 'wp-frame-lite' ),
+				'before' => '<div class="page-links">Страницы:',
 				'after'  => '</div>',
 			)
 		);
@@ -32,20 +33,7 @@
 
 	<?php if ( get_edit_post_link() ) : ?>
 		<footer class="entry-footer">
-			<?php
-			edit_post_link(
-				sprintf(
-					wp_kses(
-						/* translators: %s: название страницы */
-						__( 'Редактировать<span class="screen-reader-text"> "%s"</span>', 'wp-frame-lite' ),
-						array( 'span' => array( 'class' => array() ) )
-					),
-					wp_kses_post( get_the_title() )
-				),
-				'<span class="edit-link">',
-				'</span>'
-			);
-			?>
+			<?php edit_post_link( 'Редактировать', '<span class="edit-link">', '</span>' ); ?>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

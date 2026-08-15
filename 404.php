@@ -11,18 +11,20 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
+		<div class="container">
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'wp-frame-lite' ); ?></h1>
-			</header><!-- .page-header -->
+			<section class="error-404 not-found">
+				<header class="page-header">
+					<h1 class="page-title">Страница не найдена</h1>
+				</header><!-- .page-header -->
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'Страница не найдена. Возможно, она была удалена или перемещена.', 'wp-frame-lite' ); ?></p>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Вернуться на главную', 'wp-frame-lite' ); ?></a>
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
+				<div class="page-content">
+					<p>Возможно, она была удалена или перемещена.</p>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn">Вернуться на главную</a>
+				</div><!-- .page-content -->
+			</section><!-- .error-404 -->
 
+		</div><!-- .container -->
 	</main><!-- #main -->
 
 <?php

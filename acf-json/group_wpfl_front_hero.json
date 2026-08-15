@@ -1,0 +1,158 @@
+{
+    "key": "group_wpfl_front_hero",
+    "title": "Главная — первый экран",
+    "fields": [
+        {
+            "key": "field_wpfl_hero_show",
+            "label": "Показывать первый экран",
+            "name": "hero_show",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Да",
+            "ui_off_text": "Нет"
+        },
+        {
+            "key": "field_wpfl_hero_title",
+            "label": "Заголовок",
+            "name": "hero_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Если пусто — подставляется название сайта.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_wpfl_hero_show",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_wpfl_hero_subtitle",
+            "label": "Подзаголовок",
+            "name": "hero_subtitle",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Если пусто — подставляется описание сайта.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_wpfl_hero_show",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_wpfl_hero_button",
+            "label": "Кнопка",
+            "name": "hero_button",
+            "aria-label": "",
+            "type": "link",
+            "instructions": "Если ссылка не задана, кнопка не выводится.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_wpfl_hero_show",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array"
+        },
+        {
+            "key": "field_wpfl_hero_image",
+            "label": "Фоновое изображение",
+            "name": "hero_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Поверх изображения накладывается затемнение, чтобы текст оставался читаемым.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_wpfl_hero_show",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Первый экран главной страницы. Часть темы wp-frame-lite.",
+    "show_in_rest": 0,
+    "modified": 1786752000
+}

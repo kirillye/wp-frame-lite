@@ -1,48 +1,51 @@
-import '../scss/main.scss';
+import '../css/main.css';
 
-( function () {
+(function () {
 	'use strict';
 
-	const toggle   = document.querySelector( '.menu-toggle' );
-	const sidebar  = document.getElementById( 'mobile-sidebar' );
-	const closeBtn = document.querySelector( '.nav-close' );
+	const toggle = document.querySelector('.menu-toggle');
+	const sidebar = document.getElementById('mobile-sidebar');
+	const closeBtn = document.querySelector('.nav-close');
 
-	if ( ! toggle || ! sidebar ) return;
+	if (!toggle || !sidebar) return;
 
-	const overlay = document.createElement( 'div' );
+	const overlay = document.createElement('div');
 	overlay.className = 'nav-overlay';
-	overlay.setAttribute( 'aria-hidden', 'true' );
-	document.body.appendChild( overlay );
+	overlay.setAttribute('aria-hidden', 'true');
+	document.body.appendChild(overlay);
 
 	function openNav() {
-		document.body.classList.add( 'nav-open' );
-		sidebar.setAttribute( 'aria-hidden', 'false' );
-		toggle.setAttribute( 'aria-expanded', 'true' );
-		toggle.setAttribute( 'aria-label', 'Закрыть меню' );
+		document.body.classList.add('nav-open');
+		sidebar.setAttribute('aria-hidden', 'false');
+		toggle.setAttribute('aria-expanded', 'true');
+		toggle.setAttribute('aria-label', 'Закрыть меню');
 		document.body.style.overflow = 'hidden';
 	}
 
 	function closeNav() {
-		document.body.classList.remove( 'nav-open' );
-		sidebar.setAttribute( 'aria-hidden', 'true' );
-		toggle.setAttribute( 'aria-expanded', 'false' );
-		toggle.setAttribute( 'aria-label', 'Открыть меню' );
+		document.body.classList.remove('nav-open');
+		sidebar.setAttribute('aria-hidden', 'true');
+		toggle.setAttribute('aria-expanded', 'false');
+		toggle.setAttribute('aria-label', 'Открыть меню');
 		document.body.style.overflow = '';
 	}
 
-	toggle.addEventListener( 'click', () => {
-		document.body.classList.contains( 'nav-open' ) ? closeNav() : openNav();
-	} );
+	toggle.addEventListener('click', () => {
+		document.body.classList.contains('nav-open') ? closeNav() : openNav();
+	});
 
-	if ( closeBtn ) closeBtn.addEventListener( 'click', closeNav );
-	overlay.addEventListener( 'click', closeNav );
+	if (closeBtn) closeBtn.addEventListener('click', closeNav);
+	overlay.addEventListener('click', closeNav);
 
-	document.addEventListener( 'keydown', ( e ) => {
-		if ( e.key === 'Escape' ) closeNav();
-	} );
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeNav();
+	});
 
-	window.addEventListener( 'resize', () => {
-		if ( window.innerWidth >= 600 ) closeNav();
-	} );
-
-} )();
+	// Брейкпоинт lg — должен совпадать с components/navigation.css (992px).
+	// matchMedia срабатывает один раз на пересечении границы, а не на каждом
+	// пикселе ресайза, как это делал бы обработчик resize.
+	const desktop = window.matchMedia('(min-width: 992px)');
+	desktop.addEventListener('change', (e) => {
+		if (e.matches) closeNav();
+	});
+})();

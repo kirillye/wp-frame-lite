@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "DEVSENSE.phptools-vscode",
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint",
+    "EditorConfig.EditorConfig"
+  ]
+}

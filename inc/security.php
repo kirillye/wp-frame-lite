@@ -12,7 +12,7 @@ add_action(
 	function (): void {
 		$query_string = isset( $_SERVER['QUERY_STRING'] ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
 
-		if ( ! is_admin() && preg_match( '/author=\d/i', $query_string ) ) {
+		if ( ! is_admin() && preg_match( '/(^|&)author=\d/i', $query_string ) ) {
 			wp_die( '', '', array( 'response' => 403 ) );
 		}
 	}
@@ -40,7 +40,7 @@ add_filter(
 add_filter(
 	'login_errors',
 	function (): string {
-		return esc_html__( 'Неверный логин или пароль.', 'wp-frame-lite' );
+		return 'Неверный логин или пароль.';
 	}
 );
 
@@ -97,7 +97,7 @@ add_filter(
 		$content = file_get_contents( $file['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		if ( false === $content ) {
-			$file['error'] = esc_html__( 'Не удалось прочитать SVG-файл.', 'wp-frame-lite' );
+			$file['error'] = 'Не удалось прочитать SVG-файл.';
 			return $file;
 		}
 
@@ -107,7 +107,7 @@ add_filter(
 		libxml_clear_errors();
 
 		if ( ! $loaded ) {
-			$file['error'] = esc_html__( 'Некорректный SVG-файл.', 'wp-frame-lite' );
+			$file['error'] = 'Некорректный SVG-файл.';
 			return $file;
 		}
 

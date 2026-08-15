@@ -1,0 +1,51 @@
+.gallery {
+	display: grid;
+	gap: 0.75em;
+	margin-bottom: 1.5em;
+}
+
+.gallery-item {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
+/* Классы .gallery-columns-N расставляет сам WordPress (шорткод [gallery]) */
+.gallery-columns-2 {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-columns-3 {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery-columns-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-columns-5 {
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.gallery-columns-6 {
+	grid-template-columns: repeat(6, 1fr);
+}
+
+.gallery-columns-7 {
+	grid-template-columns: repeat(7, 1fr);
+}
+
+.gallery-columns-8 {
+	grid-template-columns: repeat(8, 1fr);
+}
+
+.gallery-columns-9 {
+	grid-template-columns: repeat(9, 1fr);
+}
+
+.gallery-caption {
+	color: var(--wpf-color-muted);
+	display: block;
+	font-size: var(--wpf-font-size-xs);
+	margin-top: 0.3em;
+}

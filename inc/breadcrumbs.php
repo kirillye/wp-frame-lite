@@ -25,9 +25,9 @@ function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 		$args,
 		array(
 			'separator'    => '/',
-			'home_label'   => __( 'Главная', 'wp-frame-lite' ),
+			'home_label'   => 'Главная',
 			'show_on_home' => false,
-			'before'       => '<nav class="breadcrumbs" aria-label="' . esc_attr__( 'Хлебные крошки', 'wp-frame-lite' ) . '">',
+			'before'       => '<nav class="breadcrumbs" aria-label="Хлебные крошки">',
 			'after'        => '</nav>',
 		)
 	);
@@ -146,19 +146,9 @@ function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 
 		$crumbs[] = array( 'label' => (string) get_query_var( 'year' ) );
 
-	} elseif ( is_search() ) {
-
-		$crumbs[] = array(
-			'label' => sprintf(
-				/* translators: %s: поисковый запрос */
-				__( 'Результаты: «%s»', 'wp-frame-lite' ),
-				get_search_query()
-			),
-		);
-
 	} elseif ( is_404() ) {
 
-		$crumbs[] = array( 'label' => __( 'Страница не найдена', 'wp-frame-lite' ) );
+		$crumbs[] = array( 'label' => 'Страница не найдена' );
 
 	}
 

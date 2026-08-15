@@ -1,0 +1,76 @@
+/*
+ * ═════════════════════════════════════════════════════════════════════════════
+ * Дизайн-токены темы.
+ *
+ * Единственное место, где лежат сырые значения. Перекрасить тему под клиента =
+ * поменять значения здесь. Переопределить в рантайме (инлайн-стиль, дочерняя
+ * тема, плагин) = переопределить нужные --wpf-* в :root или на контейнере.
+ *
+ * Брейкпоинты сюда не выносятся: var() не работает внутри @media, поэтому
+ * в медиазапросах стоят литералы. Шкала темы:
+ *
+ *   sm   480px   крупный телефон
+ *   md   768px   планшет
+ *   lg   992px   десктоп — здесь разворачивается горизонтальное меню
+ *   xl  1280px   широкий десктоп
+ *
+ * Значение lg продублировано в двух местах и должно меняться вместе:
+ *   assets/css/components/navigation.css  — 991.98px / 992px
+ *   assets/js/main.js                     — matchMedia('(min-width: 992px)')
+ * Дробное 991.98px вместо 991px закрывает щель при дробном масштабировании.
+ * ═════════════════════════════════════════════════════════════════════════════
+ */
+
+:root {
+	/* Base (light) */
+	--wpf-color-bg: #fff;
+	--wpf-color-bg-alt: #f4f4f5; /* cards, table-th, code blocks */
+	--wpf-color-text: #09090b;
+	--wpf-color-heading: #09090b;
+	--wpf-color-muted: #71717b;
+	--wpf-color-muted-alt: #a1a1aa;
+	--wpf-color-border: #e4e4e7;
+	--wpf-color-border-input: #d4d4d8;
+
+	/* Тёмные секции (hero, footer, CTA) */
+	--wpf-color-dark: #09090b;
+	--wpf-color-dark-panel: #18181b;
+	--wpf-color-dark-line: rgb(255 255 255 / 12%);
+	--wpf-color-dark-text: #fafafa;
+	--wpf-color-dark-muted: #a1a1aa;
+
+	/* Акцент бренда (CTA, ссылки, бейджи — максимум 2% площади) */
+	--wpf-color-primary: #f36730;
+	--wpf-color-primary-hover: #e05520;
+	--wpf-color-primary-rgb: 243 103 48; /* каналы для rgb(… / alpha); менять вместе с --wpf-color-primary */
+	--wpf-color-accent-2: #f9a733;
+	--wpf-color-link: #f36730;
+	--wpf-color-link-hover: #e05520;
+
+	--wpf-color-overlay: rgb(0 0 0 / 50%);
+	--wpf-color-primary-soft: rgb(var(--wpf-color-primary-rgb) / 12%);
+
+	/* Тени */
+	--wpf-shadow-sm: 0 1px 4px rgb(0 0 0 / 6%);
+	--wpf-shadow-md: 0 4px 12px rgb(0 0 0 / 8%);
+	--wpf-shadow-sidebar: -4px 0 32px rgb(0 0 0 / 12%);
+	--wpf-shadow-focus: 0 0 2px 2px rgb(0 0 0 / 40%);
+	--wpf-ring: 0 0 0 2px rgb(var(--wpf-color-primary-rgb) / 20%);
+
+	/* Типографика */
+	--wpf-font-base:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--wpf-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+	--wpf-font-size-base: 1rem;
+	--wpf-font-size-sm: 0.875rem;
+	--wpf-font-size-xs: 0.8125rem;
+	--wpf-line-height: 1.6;
+
+	/* Layout */
+	--wpf-container-max: 1140px;
+	--wpf-container-pad: 1.5rem;
+
+	/* Misc */
+	--wpf-radius: 4px;
+	--wpf-transition: 0.15s ease;
+}

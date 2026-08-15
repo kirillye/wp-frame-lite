@@ -2,7 +2,11 @@
 node_modules/
 
 # Build output
-assets/dist/
+# assets/dist/ намеренно КОММИТИТСЯ. Тема уезжает на шаред-хостинг, где Node
+# никто не запускает: без собранных файлов она осталась бы без стилей и скриптов.
+# Пересобирать перед коммитом — `npm run build`.
+# Карты исходников нужны только локально.
+assets/dist/**/*.map
 
 # Composer
 vendor/
@@ -12,7 +16,10 @@ vendor/
 Thumbs.db
 
 # IDE & Claude Code
-.vscode/
+# Настройки форматирования коммитим — они часть тулинга темы.
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 .claude/
 

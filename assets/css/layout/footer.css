@@ -1,0 +1,97 @@
+/* Footer — тёмная секция (8% от страницы) */
+.site-footer {
+	background: var(--wpf-color-dark);
+	color: var(--wpf-color-dark-muted);
+	font-size: var(--wpf-font-size-sm);
+	padding: 3rem 0 1.5rem;
+}
+
+.footer-widgets {
+	border-bottom: 1px solid var(--wpf-color-dark-line);
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	margin-bottom: 2rem;
+	padding-bottom: 2rem;
+}
+
+.footer-col__title {
+	color: var(--wpf-color-dark-text);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	margin: 0 0 0.75rem;
+}
+
+.footer-col__desc {
+	margin: 0;
+}
+
+.footer-col p {
+	margin: 0 0 0.5rem;
+}
+
+.footer-col ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer-col ul li + li {
+	margin-top: 0.35rem;
+}
+
+.footer-col a {
+	color: var(--wpf-color-dark-muted);
+	text-decoration: none;
+	transition: color var(--wpf-transition);
+}
+
+.footer-col a:hover {
+	color: var(--wpf-color-primary);
+}
+
+/*
+ * Контакты и соцсети из «Настройки сайта».
+ * Селекторы записаны как ul.footer-* намеренно: иначе общее правило
+ * `.footer-col ul li + li` перебивает их по специфичности.
+ */
+.footer-col ul.footer-contacts li + li {
+	margin-top: 0.6rem;
+}
+
+.footer-contacts address {
+	font-style: normal;
+}
+
+.footer-contacts__label {
+	color: var(--wpf-color-muted-alt);
+	display: block;
+	font-size: var(--wpf-font-size-xs);
+}
+
+.footer-col ul.footer-socials {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.25rem;
+	margin-top: 1rem;
+}
+
+.footer-col ul.footer-socials li + li {
+	margin-top: 0;
+}
+
+/* Низ подвала */
+.footer-bottom {
+	text-align: center;
+}
+
+.site-info {
+	color: var(--wpf-color-dark-muted);
+	margin: 0;
+}
+
+.site-legal {
+	color: var(--wpf-color-muted-alt);
+	font-size: var(--wpf-font-size-xs);
+	margin: 0.5rem 0 0;
+}

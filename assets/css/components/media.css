@@ -1,0 +1,28 @@
+.custom-logo-link {
+	display: inline-block;
+}
+
+.wp-caption {
+	margin-bottom: 1.5em;
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin: 0 auto;
+}
+
+.wp-caption-text,
+.wp-caption .wp-caption-text {
+	color: var(--wpf-color-muted);
+	font-size: var(--wpf-font-size-sm);
+	margin: 0.5em 0;
+	text-align: center;
+}
+
+.page-content .wp-smiley,
+.entry-content .wp-smiley {
+	border: none;
+	margin: 0;
+	padding: 0;
+}

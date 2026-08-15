@@ -1,0 +1,30 @@
+.btn,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background: var(--wpf-color-primary);
+	border: none;
+	border-radius: var(--wpf-radius);
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	line-height: var(--wpf-line-height);
+	padding: 0.55em 1.25em;
+	text-align: center;
+	text-decoration: none;
+	transition: background var(--wpf-transition);
+}
+
+:is(.btn, button, input[type="button"], input[type="reset"], input[type="submit"]):hover,
+:is(.btn, button, input[type="button"], input[type="reset"], input[type="submit"]):focus {
+	background: var(--wpf-color-primary-hover);
+	color: #fff;
+}
+
+:is(.btn, button, input[type="button"], input[type="reset"], input[type="submit"]):focus-visible {
+	outline: 2px solid var(--wpf-color-primary);
+	outline-offset: 2px;
+}

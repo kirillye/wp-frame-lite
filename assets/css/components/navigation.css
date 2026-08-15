@@ -1,0 +1,231 @@
+/* ── Кнопка-бургер ─────────────────────────────────────────────────────────── */
+
+.menu-toggle {
+	align-items: center;
+	background: none;
+	border: none;
+	box-shadow: none;
+	cursor: pointer;
+	display: none; /* показывается только на мобильных (см. ниже) */
+	flex-direction: column;
+	gap: 5px;
+	outline-offset: 4px;
+	padding: 6px 4px;
+}
+
+.menu-toggle:hover .burger-line {
+	background: var(--wpf-color-primary);
+}
+
+@media (max-width: 991.98px) {
+	.menu-toggle {
+		display: flex;
+	}
+}
+
+.burger-line {
+	background: var(--wpf-color-text);
+	border-radius: 2px;
+	display: block;
+	height: 2px;
+	transition:
+		transform 0.25s ease,
+		opacity 0.2s ease,
+		background 0.15s ease;
+	width: 22px;
+}
+
+.nav-open .burger-line:nth-child(1) {
+	transform: translateY(7px) rotate(45deg);
+}
+
+.nav-open .burger-line:nth-child(2) {
+	opacity: 0;
+	transform: scaleX(0);
+}
+
+.nav-open .burger-line:nth-child(3) {
+	transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Оверлей — перекрывает ВСЁ включая header ──────────────────────────────── */
+
+.nav-overlay {
+	background: var(--wpf-color-overlay);
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	transition: opacity 0.3s ease;
+	z-index: 300; /* выше header (250) */
+}
+
+.nav-open .nav-overlay {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* ── Десктопная навигация (только от 992px) ────────────────────────────────── */
+
+@media (max-width: 991.98px) {
+	.main-navigation {
+		display: none; /* на мобильных скрыта — используется mobile-sidebar */
+	}
+}
+
+.main-navigation ul {
+	align-items: center;
+	display: flex;
+	gap: 0.25rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.main-navigation ul ul {
+	background: var(--wpf-color-bg);
+	border: 1px solid var(--wpf-color-border);
+	border-radius: var(--wpf-radius);
+	box-shadow: var(--wpf-shadow-md);
+	left: -999em;
+	min-width: 180px;
+	position: absolute;
+	top: 100%;
+	z-index: 9999;
+}
+
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
+	left: 0;
+}
+
+.main-navigation ul ul li:hover > ul,
+.main-navigation ul ul li.focus > ul {
+	left: 100%;
+	top: 0;
+}
+
+.main-navigation li {
+	position: relative;
+}
+
+.main-navigation a {
+	color: var(--wpf-color-text);
+	display: block;
+	font-size: 0.9375rem;
+	padding: 0.4em 0.75em;
+	text-decoration: none;
+	transition: color var(--wpf-transition);
+}
+
+.main-navigation a:hover {
+	color: var(--wpf-color-primary);
+}
+
+/* ── Мобильный сайдбар — отдельный элемент вне header ──────────────────────── */
+
+.mobile-sidebar {
+	background: var(--wpf-color-bg);
+	box-shadow: var(--wpf-shadow-sidebar);
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	max-width: 320px;
+	overflow-y: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transform: translateX(110%);
+	transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+	width: 85vw;
+	z-index: 400; /* выше overlay (300) и header (250) */
+}
+
+@media (min-width: 992px) {
+	.mobile-sidebar {
+		display: none; /* на десктопе не нужен */
+	}
+}
+
+.nav-open .mobile-sidebar {
+	transform: translateX(0);
+}
+
+/* Шапка сайдбара */
+.mobile-sidebar__head {
+	align-items: center;
+	border-bottom: 1px solid var(--wpf-color-border);
+	display: flex;
+	flex-shrink: 0;
+	justify-content: space-between;
+	padding: 1rem 1.25rem;
+}
+
+.mobile-sidebar__brand {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.mobile-sidebar__brand a {
+	color: var(--wpf-color-heading);
+	text-decoration: none;
+}
+
+/* Кнопка закрытия */
+.nav-close {
+	background: none;
+	border: none;
+	box-shadow: none;
+	color: var(--wpf-color-muted);
+	cursor: pointer;
+	font-size: 1.5rem;
+	line-height: 1;
+	padding: 4px 6px;
+	transition: color var(--wpf-transition);
+}
+
+.nav-close:hover,
+.nav-close:focus {
+	background: none;
+	color: var(--wpf-color-primary);
+}
+
+/* Навигация внутри сайдбара */
+.mobile-sidebar__nav {
+	flex: 1;
+	padding: 0.75rem 0;
+}
+
+.mobile-sidebar__nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mobile-sidebar__nav a {
+	color: var(--wpf-color-text);
+	display: block;
+	font-size: 1rem;
+	font-weight: 500;
+	padding: 0.75rem 1.25rem;
+	text-decoration: none;
+	transition:
+		color var(--wpf-transition),
+		background var(--wpf-transition);
+}
+
+.mobile-sidebar__nav a:hover {
+	background: var(--wpf-color-bg-alt);
+	color: var(--wpf-color-primary);
+}
+
+.mobile-sidebar__nav li + li {
+	border-top: 1px solid var(--wpf-color-border);
+}
+
+/* Футер сайдбара (телефон, соцсети и т.д.) */
+.mobile-sidebar__footer {
+	border-top: 1px solid var(--wpf-color-border);
+	flex-shrink: 0;
+	padding: 1.25rem;
+}

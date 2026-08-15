@@ -1,0 +1,65 @@
+.entry-header {
+	margin-bottom: 1.5rem;
+}
+
+.entry-title {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.entry-title a {
+	color: var(--wpf-color-heading);
+	text-decoration: none;
+}
+
+.entry-title a:hover {
+	color: var(--wpf-color-primary);
+}
+
+.entry-meta {
+	color: var(--wpf-color-muted-alt);
+	font-size: var(--wpf-font-size-sm);
+	margin-bottom: 0.75rem;
+}
+
+.entry-content,
+.entry-summary {
+	margin-top: 1rem;
+}
+
+.entry-footer {
+	color: var(--wpf-color-muted-alt);
+	font-size: var(--wpf-font-size-sm);
+	margin-top: 1.5rem;
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+.page-links {
+	clear: both;
+	margin: 1em 0;
+}
+
+.posts-navigation,
+.post-navigation {
+	margin: 2em 0;
+}
+
+.posts-navigation .nav-links,
+.post-navigation .nav-links {
+	display: flex;
+	gap: 1rem;
+}
+
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	flex: 1;
+}
+
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	flex: 1;
+	text-align: right;
+}

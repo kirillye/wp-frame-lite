@@ -13,3 +13,9 @@
 *.ttf binary
 *.eot binary
 *.zip binary
+*.br binary
+*.gz binary
+
+# Сборка и конвертация — генерируются, диффы в них смотреть незачем
+assets/dist/** linguist-generated=true
+assets/webp/** linguist-generated=true

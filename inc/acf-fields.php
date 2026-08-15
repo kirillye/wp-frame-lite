@@ -12,13 +12,23 @@ const WP_FRAME_LITE_ACF_JSON_DIR = '/acf-json';
 add_action(
 	'admin_notices',
 	function (): void {
-		if ( ! current_user_can( 'activate_plugins' ) || function_exists( 'acf' ) || class_exists( 'ACF' ) ) {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
 
-		echo '<div class="notice notice-error"><p>';
-		echo esc_html__( 'Для темы wp-frame-lite обязателен плагин Advanced Custom Fields.', 'wp-frame-lite' );
-		echo '</p></div>';
+		if ( ! function_exists( 'acf' ) && ! class_exists( 'ACF' ) ) {
+			echo '<div class="notice notice-error"><p>';
+			echo esc_html( 'Для темы wp-frame-lite обязателен плагин Advanced Custom Fields PRO.' );
+			echo '</p></div>';
+
+			return;
+		}
+
+		if ( ! function_exists( 'acf_add_options_page' ) ) {
+			echo '<div class="notice notice-warning"><p>';
+			echo esc_html( 'Установлена бесплатная версия ACF: страница «Настройки сайта» недоступна. Нужна ACF PRO.' );
+			echo '</p></div>';
+		}
 	}
 );
 
@@ -41,16 +51,54 @@ add_filter(
 /**
  * Получить ACF option field с fallback-значением.
  *
+ * Не использовать для true_false — см. wp_frame_lite_flag().
+ *
  * @param string $field   ACF field name.
  * @param mixed  $default Fallback value.
  * @return mixed
  */
 function wp_frame_lite_option( string $field, mixed $default = '' ): mixed {
+	return wp_frame_lite_field( $field, $default, 'option' );
+}
+
+/**
+ * Получить ACF-поле записи с fallback-значением.
+ *
+ * Не использовать для true_false: выключенный чекбокс вернёт false и будет
+ * заменён на $default. Для флагов есть wp_frame_lite_flag().
+ *
+ * @param string          $field   ACF field name.
+ * @param mixed           $default Fallback value.
+ * @param int|string|null $post_id ID записи, 'option' или null (текущая запись).
+ * @return mixed
+ */
+function wp_frame_lite_field( string $field, mixed $default = '', int|string|null $post_id = null ): mixed {
 	if ( ! function_exists( 'get_field' ) ) {
 		return $default;
 	}
 
-	$value = get_field( $field, 'option' );
+	$value = get_field( $field, $post_id ?? false );
 
-	return null !== $value && false !== $value && '' !== $value ? $value : $default;
+	return null !== $value && false !== $value && '' !== $value && array() !== $value ? $value : $default;
+}
+
+/**
+ * Получить булево ACF-поле (true_false), сохраняя явное «выключено».
+ *
+ * @param string          $field   ACF field name.
+ * @param bool            $default Значение, если поле ещё ни разу не сохраняли.
+ * @param int|string|null $post_id ID записи, 'option' или null (текущая запись).
+ */
+function wp_frame_lite_flag( string $field, bool $default = true, int|string|null $post_id = null ): bool {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $default;
+	}
+
+	$value = get_field( $field, $post_id ?? false );
+
+	if ( null === $value || '' === $value ) {
+		return $default;
+	}
+
+	return (bool) $value;
 }

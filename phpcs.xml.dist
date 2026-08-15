@@ -45,25 +45,21 @@
 	#############################################################################
 	-->
 
+	<!--
+		Раньше здесь был ещё ruleset WPThemeReview из wptrt/wpthemereview.
+		Пакет не обновлялся с 2020 года и тянул PHPCS 3.5, который не разбирает
+		union-типы (int|string|null) из inc/acf-fields.php. Заменён на WPCS 3.x.
+	-->
 	<rule ref="WordPress">
-		<!-- This rule does not apply here since the _s prefix should be changed by the theme author. -->
-		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.ShortPrefixPassed"/>
+		<!-- Тема одноязычная и не использует текстовый домен. -->
+		<exclude name="WordPress.WP.I18n"/>
 	</rule>
-	<rule ref="WPThemeReview"/>
 
 	<!--
 	#############################################################################
 	SNIFF SPECIFIC CONFIGURATION
 	#############################################################################
 	-->
-
-	<!-- Verify that the text_domain is set to the desired text-domain.
-		 Multiple valid text domains can be provided as a comma-delimited list. -->
-	<rule ref="WordPress.WP.I18n">
-		<properties>
-			<property name="text_domain" type="array" value="_s"/>
-		</properties>
-	</rule>
 
 	<!-- Allow for theme specific exceptions to the file name rules based
 		 on the theme hierarchy. -->
@@ -76,7 +72,7 @@
 	<!-- Set the minimum supported WP version. This is used by several sniffs.
 		 The minimum version set here should be in line with the minimum WP version
 		 as set in the "Requires at least" tag in the readme.txt file. -->
-	<config name="minimum_supported_wp_version" value="4.5"/>
+	<config name="minimum_supported_wp_version" value="6.0"/>
 
 	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
 		<properties>
@@ -93,7 +89,7 @@
 		 Multiple valid prefixes can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="_s" />
+			<property name="prefixes" type="array" value="wp_frame_lite,WP_FRAME_LITE" />
 		</properties>
 	</rule>
 
@@ -104,7 +100,7 @@
 	#############################################################################
 	-->
 
-	<config name="testVersion" value="5.6-"/>
+	<config name="testVersion" value="8.0-"/>
 	<rule ref="PHPCompatibilityWP"/>
 
 </ruleset>

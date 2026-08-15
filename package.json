@@ -1,7 +1,7 @@
 {
   "name": "wp-frame-lite",
-  "version": "1.0.0",
-  "description": "Стартовая WordPress-тема для клиентских проектов.",
+  "version": "1.2.0",
+  "description": "Лёгкая стартовая WordPress-тема для небольших корпоративных сайтов.",
   "author": "Inveris <https://github.com/kirillye>",
   "license": "GPL-2.0-or-later",
   "type": "module",
@@ -11,15 +11,24 @@
   ],
   "homepage": "https://github.com/kirillye",
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "vite build",
-    "bundle": "dir-archiver --src . --dest ../wp-frame-lite.zip --exclude .DS_Store .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json vite.config.js phpcs.xml.dist assets/scss assets/js"
+    "dev": "npm run images && vite build --watch",
+    "build": "npm run images && vite build && npm run compress",
+    "images": "node scripts/build-images.mjs",
+    "compress": "node scripts/compress-dist.mjs",
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "lint:css:fix": "stylelint \"assets/css/**/*.css\" --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "bundle": "dir-archiver --src . --dest ../wp-frame-lite.zip --exclude .DS_Store .git .gitattributes .github .gitignore .editorconfig .vscode .prettierrc.json .prettierignore .stylelintrc.json README.md composer.json composer.lock node_modules vendor package-lock.json package.json vite.config.js postcss.config.js phpcs.xml.dist scripts assets/css assets/js"
   },
   "devDependencies": {
+    "@wordpress/stylelint-config": "^24.2.0",
     "autoprefixer": "^10.5.0",
     "dir-archiver": "^1.1.1",
     "postcss": "^8.5.15",
-    "sass": "^1.77.0",
+    "prettier": "^3.9.6",
+    "sharp": "^0.35.3",
+    "stylelint": "^16.26.1",
     "vite": "^8.0.16"
   }
 }

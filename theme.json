@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.0/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "custom": true,
+      "customDuotone": false,
+      "customGradient": false,
+      "defaultDuotone": false,
+      "defaultGradients": false,
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "primary", "name": "Акцент", "color": "#f36730" },
+        { "slug": "accent", "name": "Акцент второй", "color": "#f9a733" },
+        { "slug": "text", "name": "Текст", "color": "#09090b" },
+        { "slug": "muted", "name": "Приглушённый текст", "color": "#71717b" },
+        { "slug": "base", "name": "Фон", "color": "#ffffff" },
+        { "slug": "surface", "name": "Подложка", "color": "#f4f4f5" },
+        { "slug": "border", "name": "Границы", "color": "#e4e4e7" },
+        { "slug": "dark", "name": "Тёмная секция", "color": "#18181b" }
+      ]
+    },
+    "layout": {
+      "contentSize": "1092px",
+      "wideSize": "1140px"
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "units": ["px", "rem", "%", "vw"]
+    },
+    "typography": {
+      "customFontSize": true,
+      "dropCap": false,
+      "lineHeight": true,
+      "fontFamilies": [
+        {
+          "slug": "base",
+          "name": "Основной",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+        },
+        {
+          "slug": "mono",
+          "name": "Моноширинный",
+          "fontFamily": "\"SFMono-Regular\", Consolas, \"Liberation Mono\", Menlo, monospace"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "small", "name": "Мелкий", "size": "0.875rem" },
+        { "slug": "medium", "name": "Обычный", "size": "1rem" },
+        { "slug": "large", "name": "Крупный", "size": "1.375rem" },
+        { "slug": "x-large", "name": "Заголовок", "size": "1.625rem" },
+        { "slug": "xx-large", "name": "Крупный заголовок", "size": "3rem" }
+      ]
+    }
+  }
+}

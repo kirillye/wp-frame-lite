@@ -1,0 +1,44 @@
+.site-header {
+	background: var(--wpf-color-bg);
+	border-bottom: 1px solid var(--wpf-color-border);
+	box-shadow: var(--wpf-shadow-sm);
+	padding: 1rem 0;
+	position: sticky;
+	top: 0;
+	z-index: 250;
+}
+
+.header-inner {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+}
+
+.site-branding {
+	align-items: center;
+	display: flex;
+	flex-shrink: 0;
+	gap: 0.75rem;
+}
+
+.site-title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.site-title a {
+	color: var(--wpf-color-heading);
+	text-decoration: none;
+}
+
+.site-title a:hover {
+	color: var(--wpf-color-primary);
+}
+
+.site-description {
+	color: var(--wpf-color-muted);
+	font-size: var(--wpf-font-size-sm);
+	margin: 0;
+}

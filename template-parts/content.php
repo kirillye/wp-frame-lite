@@ -4,6 +4,7 @@
  *
  * @package wp-frame-lite
  */
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -32,20 +33,11 @@
 
 	<div class="entry-content">
 		<?php
-		the_content(
-			sprintf(
-				wp_kses(
-					/* translators: %s: название записи */
-					__( 'Читать далее<span class="screen-reader-text"> "%s"</span>', 'wp-frame-lite' ),
-					array( 'span' => array( 'class' => array() ) )
-				),
-				wp_kses_post( get_the_title() )
-			)
-		);
+		the_content( 'Читать далее<span class="screen-reader-text"> «' . esc_html( get_the_title() ) . '»</span>' );
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Страницы:', 'wp-frame-lite' ),
+				'before' => '<div class="page-links">Страницы:',
 				'after'  => '</div>',
 			)
 		);
@@ -64,18 +56,8 @@
 				printf( '<span class="tags-links">%s</span>', wp_kses_post( $tags_list ) );
 			}
 		}
-		edit_post_link(
-			sprintf(
-				wp_kses(
-					/* translators: %s: название записи */
-					__( 'Редактировать<span class="screen-reader-text"> "%s"</span>', 'wp-frame-lite' ),
-					array( 'span' => array( 'class' => array() ) )
-				),
-				wp_kses_post( get_the_title() )
-			),
-			'<span class="edit-link">',
-			'</span>'
-		);
+
+		edit_post_link( 'Редактировать', '<span class="edit-link">', '</span>' );
 		?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

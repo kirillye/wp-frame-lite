@@ -1,0 +1,21 @@
+node_modules/
+vendor/
+
+# Сборка Vite
+assets/dist/
+
+# Результат npm run images — генерируется, форматировать нечего
+assets/webp/
+
+# ACF перезаписывает эти файлы сам — форматировать их бессмысленно
+acf-json/
+
+# Шапка темы, её читает WordPress — не трогаем
+style.css
+
+package-lock.json
+composer.lock
+LICENSE
+
+# PHP форматирует DEVSENSE PHP Tools (см. .vscode/settings.json)
+*.php

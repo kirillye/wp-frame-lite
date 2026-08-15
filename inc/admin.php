@@ -7,53 +7,45 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Показать в админ-баре, каким шаблоном отрисована страница.
+ *
+ * На фронте — реальный подключённый файл, в админке на экране правки —
+ * шаблон, выбранный у записи. Обе ветки регистрируют один и тот же узел,
+ * поэтому живут в одном колбэке: два разных обработчика с одинаковым id
+ * молча перетирали бы друг друга при любой правке условий.
+ */
 add_action(
 	'admin_bar_menu',
 	function ( WP_Admin_Bar $wp_admin_bar ): void {
-		if ( is_admin() || ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		global $template;
+		if ( is_admin() ) {
+			$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
-		if ( empty( $template ) ) {
-			return;
+			if ( ! $screen || 'post' !== $screen->base ) {
+				return;
+			}
+
+			$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			if ( ! $post_id ) {
+				return;
+			}
+
+			$template = get_post_meta( $post_id, '_wp_page_template', true ) ?: 'default';
+			$label    = 'default' === $template ? '(по умолчанию)' : $template;
+		} else {
+			global $template;
+
+			if ( empty( $template ) ) {
+				return;
+			}
+
+			$label = basename( $template );
 		}
-
-		$name = basename( $template );
-
-		$wp_admin_bar->add_node(
-			array(
-				'id'    => 'wp-frame-template',
-				'title' => 'Шаблон страницы: ' . esc_html( $name ),
-				'meta'  => array( 'title' => 'Шаблон страницы: ' . esc_attr( $name ) ),
-			)
-		);
-	},
-	100
-);
-
-add_action(
-	'admin_bar_menu',
-	function ( WP_Admin_Bar $wp_admin_bar ): void {
-		if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-
-		if ( ! $screen || 'post' !== $screen->base ) {
-			return;
-		}
-
-		$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-		if ( ! $post_id ) {
-			return;
-		}
-
-		$template = get_post_meta( $post_id, '_wp_page_template', true ) ?: 'default';
-		$label    = 'default' === $template ? __( '(по умолчанию)', 'wp-frame-lite' ) : $template;
 
 		$wp_admin_bar->add_node(
 			array(

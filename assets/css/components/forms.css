@@ -1,0 +1,86 @@
+input,
+select,
+optgroup,
+textarea,
+button {
+	font-family: inherit;
+	font-size: var(--wpf-font-size-base);
+	line-height: var(--wpf-line-height);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+input[type="color"],
+select,
+textarea {
+	background: var(--wpf-color-bg);
+	border: 1px solid var(--wpf-color-border-input);
+	border-radius: var(--wpf-radius);
+	color: var(--wpf-color-text);
+	padding: 0.5em 0.75em;
+	transition:
+		border-color var(--wpf-transition),
+		box-shadow var(--wpf-transition);
+	width: 100%;
+}
+
+:is(
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="number"],
+	input[type="tel"],
+	input[type="date"],
+	input[type="time"],
+	input[type="datetime-local"],
+	input[type="month"],
+	input[type="week"],
+	input[type="color"],
+	select,
+	textarea
+)::placeholder {
+	color: var(--wpf-color-muted-alt);
+}
+
+:is(
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="number"],
+	input[type="tel"],
+	input[type="date"],
+	input[type="time"],
+	input[type="datetime-local"],
+	input[type="month"],
+	input[type="week"],
+	input[type="color"],
+	select,
+	textarea
+):focus {
+	border-color: var(--wpf-color-primary);
+	box-shadow: var(--wpf-ring);
+	outline: none;
+}
+
+textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+label {
+	display: block;
+	font-size: var(--wpf-font-size-sm);
+	font-weight: 600;
+	margin-bottom: 0.3em;
+}

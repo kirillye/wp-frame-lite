@@ -12,13 +12,17 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * @param array{
- *   separator:    string,
- *   home_label:   string,
- *   show_on_home: bool,
- *   before:       string,
- *   after:        string,
- * } $args
+ * Выводит хлебные крошки с микроразметкой Schema.org.
+ *
+ * @param array $args {
+ *     Необязательные параметры вывода.
+ *
+ *     @type string $separator    Разделитель между звеньями. По умолчанию '/'.
+ *     @type string $home_label   Подпись первого звена. По умолчанию 'Главная'.
+ *     @type bool   $show_on_home Выводить ли крошки на главной. По умолчанию false.
+ *     @type string $before       Разметка перед списком. Не экранируется.
+ *     @type string $after        Разметка после списка. Не экранируется.
+ * }
  */
 function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 	$args = wp_parse_args(
@@ -61,7 +65,7 @@ function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 						'label' => $cat->name,
 						'url'   => get_category_link( $cat->term_id ),
 					);
-					$cat = $cat->parent ? get_term( $cat->parent, 'category' ) : null;
+					$cat     = $cat->parent ? get_term( $cat->parent, 'category' ) : null;
 				}
 				foreach ( array_reverse( $chain ) as $c ) {
 					$crumbs[] = $c;
@@ -130,8 +134,14 @@ function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 		$month = (int) get_query_var( 'monthnum' );
 		$day   = (int) get_query_var( 'day' );
 
-		$crumbs[] = array( 'label' => (string) $year, 'url' => get_year_link( $year ) );
-		$crumbs[] = array( 'label' => date_i18n( 'F', mktime( 0, 0, 0, $month, 1, $year ) ), 'url' => get_month_link( $year, $month ) );
+		$crumbs[] = array(
+			'label' => (string) $year,
+			'url'   => get_year_link( $year ),
+		);
+		$crumbs[] = array(
+			'label' => date_i18n( 'F', mktime( 0, 0, 0, $month, 1, $year ) ),
+			'url'   => get_month_link( $year, $month ),
+		);
 		$crumbs[] = array( 'label' => (string) $day );
 
 	} elseif ( is_month() ) {
@@ -139,7 +149,10 @@ function wp_frame_lite_breadcrumbs( array $args = array() ): void {
 		$year  = (int) get_query_var( 'year' );
 		$month = (int) get_query_var( 'monthnum' );
 
-		$crumbs[] = array( 'label' => (string) $year, 'url' => get_year_link( $year ) );
+		$crumbs[] = array(
+			'label' => (string) $year,
+			'url'   => get_year_link( $year ),
+		);
 		$crumbs[] = array( 'label' => date_i18n( 'F', mktime( 0, 0, 0, $month, 1, $year ) ) );
 
 	} elseif ( is_year() ) {

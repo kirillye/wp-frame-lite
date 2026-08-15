@@ -7,6 +7,12 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Подключает собранные стили и скрипты темы.
+ *
+ * Версия берётся из filemtime собранного файла: так кэш сбрасывается на каждой
+ * пересборке, но не меняется при каждом деплое без изменений.
+ */
 function wp_frame_lite_scripts(): void {
 	$dir = get_template_directory();
 	$uri = get_template_directory_uri();

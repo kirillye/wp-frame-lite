@@ -58,7 +58,7 @@ add_action(
 // Любой другой путь до wp_new_comment(): REST, XML-RPC, сторонний код.
 add_filter(
 	'preprocess_comment',
-	function ( array $commentdata ): array {
+	function (): array {
 		wp_die( 'Комментарии отключены.', '', array( 'response' => 403 ) );
 	}
 );

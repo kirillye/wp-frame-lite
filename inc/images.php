@@ -38,7 +38,7 @@ function wp_frame_lite_image_manifest(): array {
 	$path     = get_template_directory() . WP_FRAME_LITE_WEBP_DIR . '/manifest.json';
 
 	if ( is_readable( $path ) ) {
-		$raw = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$raw     = file_get_contents( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$decoded = json_decode( (string) $raw, true );
 
 		if ( is_array( $decoded ) ) {

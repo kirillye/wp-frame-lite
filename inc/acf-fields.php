@@ -54,50 +54,50 @@ add_filter(
  * Не использовать для true_false — см. wp_frame_lite_flag().
  *
  * @param string $field   ACF field name.
- * @param mixed  $default Fallback value.
+ * @param mixed  $fallback Fallback value.
  * @return mixed
  */
-function wp_frame_lite_option( string $field, mixed $default = '' ): mixed {
-	return wp_frame_lite_field( $field, $default, 'option' );
+function wp_frame_lite_option( string $field, mixed $fallback = '' ): mixed {
+	return wp_frame_lite_field( $field, $fallback, 'option' );
 }
 
 /**
  * Получить ACF-поле записи с fallback-значением.
  *
  * Не использовать для true_false: выключенный чекбокс вернёт false и будет
- * заменён на $default. Для флагов есть wp_frame_lite_flag().
+ * заменён на $fallback. Для флагов есть wp_frame_lite_flag().
  *
  * @param string          $field   ACF field name.
- * @param mixed           $default Fallback value.
+ * @param mixed           $fallback Fallback value.
  * @param int|string|null $post_id ID записи, 'option' или null (текущая запись).
  * @return mixed
  */
-function wp_frame_lite_field( string $field, mixed $default = '', int|string|null $post_id = null ): mixed {
+function wp_frame_lite_field( string $field, mixed $fallback = '', int|string|null $post_id = null ): mixed {
 	if ( ! function_exists( 'get_field' ) ) {
-		return $default;
+		return $fallback;
 	}
 
 	$value = get_field( $field, $post_id ?? false );
 
-	return null !== $value && false !== $value && '' !== $value && array() !== $value ? $value : $default;
+	return null !== $value && false !== $value && '' !== $value && array() !== $value ? $value : $fallback;
 }
 
 /**
  * Получить булево ACF-поле (true_false), сохраняя явное «выключено».
  *
  * @param string          $field   ACF field name.
- * @param bool            $default Значение, если поле ещё ни разу не сохраняли.
+ * @param bool            $fallback Значение, если поле ещё ни разу не сохраняли.
  * @param int|string|null $post_id ID записи, 'option' или null (текущая запись).
  */
-function wp_frame_lite_flag( string $field, bool $default = true, int|string|null $post_id = null ): bool {
+function wp_frame_lite_flag( string $field, bool $fallback = true, int|string|null $post_id = null ): bool {
 	if ( ! function_exists( 'get_field' ) ) {
-		return $default;
+		return $fallback;
 	}
 
 	$value = get_field( $field, $post_id ?? false );
 
 	if ( null === $value || '' === $value ) {
-		return $default;
+		return $fallback;
 	}
 
 	return (bool) $value;

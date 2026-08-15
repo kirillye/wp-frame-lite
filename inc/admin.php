@@ -35,8 +35,13 @@ add_action(
 				return;
 			}
 
-			$template = get_post_meta( $post_id, '_wp_page_template', true ) ?: 'default';
-			$label    = 'default' === $template ? '(по умолчанию)' : $template;
+			$template = get_post_meta( $post_id, '_wp_page_template', true );
+
+			if ( ! $template ) {
+				$template = 'default';
+			}
+
+			$label = 'default' === $template ? '(по умолчанию)' : $template;
 		} else {
 			global $template;
 

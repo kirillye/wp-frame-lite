@@ -236,6 +236,17 @@ composer lint:wpcs
 composer lint:php
 ```
 
+`composer lint:wpcs` — WordPress Coding Standards 3.x, `lint:php` — параллельная проверка синтаксиса. Часть замечаний PHPCS чинится автоматически:
+
+```sh
+./vendor/bin/phpcbf
+```
+
+В `phpcs.xml.dist` два осознанных послабления:
+
+- ruleset `WPThemeReview` убран — пакет `wptrt/wpthemereview` не обновлялся с 2020 года и тянул PHPCS 3.5, который не разбирает union-типы вроде `int|string|null`;
+- сниф `PrefixAllGlobals.NonPrefixedVariableFound` проверяет только `inc/`. В шаблонах он даёт ложные срабатывания: WordPress подключает их через `load_template()`, то есть внутри функции, так что переменные вида `$footer_phones` глобальными не являются — а сниф требует префикс у каждой.
+
 ### Сборка и деплой
 
 **`assets/dist/` коммитится в репозиторий** — это осознанное решение, а не недосмотр. Тема уезжает на шаред-хостинг, где Node никто не запускает, а подключается она только из `dist`: без собранных файлов сайт остался бы без стилей и скриптов. По той же причине коммитится `assets/webp/`.

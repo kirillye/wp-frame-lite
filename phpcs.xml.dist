@@ -89,8 +89,22 @@
 		 Multiple valid prefixes can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="wp_frame_lite,WP_FRAME_LITE" />
+			<property name="prefixes" type="array">
+				<element value="wp_frame_lite"/>
+				<element value="WP_FRAME_LITE"/>
+			</property>
 		</properties>
+	</rule>
+
+	<!--
+		Ложное срабатывание в шаблонах. WordPress подключает их через
+		load_template(), то есть внутри функции — переменные вида $footer_phones
+		живут в её области видимости и глобальными не являются. Сниф этого не
+		знает и требует префикс у каждой. Проверяем только inc/, где объявляется
+		код темы и где настоящие глобальные объявления возможны.
+	-->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+		<include-pattern>*/inc/*\.php$</include-pattern>
 	</rule>
 
 

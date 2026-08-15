@@ -115,14 +115,14 @@ add_filter(
 
 		foreach ( $dangerous_tags as $tag ) {
 			foreach ( $dom->getElementsByTagName( $tag ) as $node ) {
-				$node->parentNode->removeChild( $node );
+				$node->parentNode->removeChild( $node ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- свойство расширения DOM, переименовать нельзя.
 			}
 		}
 
 		// Strip on* event attributes from all elements.
 		$xpath = new DOMXPath( $dom );
 		foreach ( $xpath->query( '//@*[starts-with(name(), "on")]' ) as $attr ) {
-			$attr->ownerElement->removeAttributeNode( $attr );
+			$attr->ownerElement->removeAttributeNode( $attr ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- свойство расширения DOM, переименовать нельзя.
 		}
 
 		file_put_contents( $file['tmp_name'], $dom->saveXML() ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents

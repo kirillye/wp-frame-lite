@@ -7,6 +7,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Регистрирует возможности темы: меню, логотип, миниатюры, поддержку блоков.
+ */
 function wp_frame_lite_setup(): void {
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'title-tag' );
@@ -36,6 +39,9 @@ function wp_frame_lite_setup(): void {
 }
 add_action( 'after_setup_theme', 'wp_frame_lite_setup' );
 
+/**
+ * Задаёт $content_width — от него WordPress считает размеры oEmbed.
+ */
 function wp_frame_lite_content_width(): void {
 	// Ширина контента = --wpf-container-max (1140px) минус боковые отступы
 	// --wpf-container-pad (2 × 1.5rem = 48px). Значение влияет на размеры oEmbed.

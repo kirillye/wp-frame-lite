@@ -19,3 +19,9 @@
 # Сборка и конвертация — генерируются, диффы в них смотреть незачем
 assets/dist/** linguist-generated=true
 assets/webp/** linguist-generated=true
+assets/vendor/** linguist-vendored=true
+
+# Сторонние библиотеки хранятся байт-в-байт. Нормализация переводов строк
+# из `* text=auto eol=lf` срезала бы CR и файл в репозитории перестал бы
+# совпадать со своими .br/.gz, собранными из исходных байтов.
+assets/vendor/** -text

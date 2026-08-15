@@ -1,6 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
-  "ignoreFiles": ["node_modules/**", "assets/dist/**"],
+  "ignoreFiles": ["node_modules/**", "assets/dist/**", "assets/vendor/**"],
   "rules": {
     "font-family-no-missing-generic-family-keyword": null,
     "no-descending-specificity": null,

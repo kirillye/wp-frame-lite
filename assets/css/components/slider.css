@@ -1,0 +1,37 @@
+/*
+ * Привязка Swiper к палитре темы.
+ *
+ * Собственные стили Swiper лежат в assets/vendor и подключаются отдельно —
+ * здесь только его CSS-переменные, переведённые на токены --wpf-*.
+ * Файл маленький и грузится всегда: без подключённого Swiper эти правила
+ * просто ни к чему не применяются.
+ */
+
+.swiper {
+	--swiper-theme-color: var(--wpf-color-primary);
+	--swiper-navigation-color: var(--wpf-color-primary);
+	--swiper-navigation-size: 24px;
+	--swiper-navigation-sides-offset: 8px;
+	--swiper-pagination-color: var(--wpf-color-primary);
+	--swiper-pagination-bullet-inactive-color: var(--wpf-color-muted-alt);
+	--swiper-pagination-bullet-inactive-opacity: 1;
+	--swiper-pagination-bullet-size: 8px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+	transition: opacity var(--wpf-transition);
+}
+
+.swiper-button-next:focus-visible,
+.swiper-button-prev:focus-visible {
+	outline: 2px solid var(--wpf-color-primary);
+	outline-offset: 2px;
+}
+
+/* Тёмные секции: стрелки и точки на тёмном фоне */
+.hero .swiper,
+.site-footer .swiper {
+	--swiper-navigation-color: var(--wpf-color-dark-text);
+	--swiper-pagination-bullet-inactive-color: var(--wpf-color-dark-muted);
+}

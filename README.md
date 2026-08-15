@@ -20,6 +20,8 @@ acf-json/                        - ACF JSON sync
   group_wpfl_front_hero.json     - поля первого экрана главной
 assets/
   js/main.js                     - точка входа JS
+  js/modules/                    - navigation, slider, lightbox
+  vendor/                        - Swiper и GLightbox (см. vendor/README.md)
   css/main.css                   - точка входа CSS (только @import, задаёт порядок каскада)
   css/base/variables.css         - дизайн-токены (см. ниже)
   css/{base,layout,components,utilities}/
@@ -28,7 +30,7 @@ assets/
   dist/                          - production-сборка Vite
 scripts/
   build-images.mjs               - конвертация картинок в webp
-  compress-dist.mjs              - преджатие сборки в .br и .gz
+  compress-dist.mjs              - преджатие dist и vendor в .br и .gz
 theme.json                       - палитра и layout для редактора (см. ниже)
 front-page.php                   - главная: hero + контент/лента
 inc/
@@ -124,7 +126,7 @@ wp_frame_lite_breadcrumbs( array(
 Пара нюансов:
 
 - Для полупрозрачных вариантов цвета есть отдельный токен каналов `--wpf-color-primary-rgb` и запись `rgb(var(--wpf-color-primary-rgb) / 12%)`. Если меняете акцент — меняйте оба токена.
-- Брейкпоинты в токены не вынесены: `var()` не работает внутри `@media`. Шкала описана комментарием в начале `variables.css` — `sm 480`, `md 768`, `lg 992`, `xl 1280`. Реально используется только `lg`: на нём разворачивается горизонтальное меню. Значение продублировано в `components/navigation.css` и `assets/js/main.js` и меняется в обоих местах сразу.
+- Брейкпоинты в токены не вынесены: `var()` не работает внутри `@media`. Шкала описана комментарием в начале `variables.css` — `sm 480`, `md 768`, `lg 992`, `xl 1280`. Реально используется только `lg`: на нём разворачивается горизонтальное меню. Значение продублировано в `components/navigation.css` и `assets/js/modules/navigation.js` и меняется в обоих местах сразу.
 
 ### theme.json
 
@@ -207,6 +209,59 @@ Vite подхватит оба файла, положит в `assets/dist/img/` 
 ### Почему `<picture>`, а не определение по заголовку Accept
 
 Серверное определение поддержки webp несовместимо с кэшированием страниц. При включённом W3TC или Cloudflare закэшированный HTML отдаётся всем одинаковый — первый зашедший браузер зафиксировал бы выбор формата для всех остальных. `<picture>` и `image-set()` решают это на стороне браузера и переживают любой кэш и CDN, не требуя ни строчки в конфиге сервера.
+
+## Слайдеры и лайтбокс
+
+В теме лежат **Swiper 11** и **GLightbox 3** — файлами в `assets/vendor`, не пакетами npm. Вместе они весят около 200 кБ против 15 кБ собственной сборки, поэтому подключаются **не всегда, а по требованию**:
+
+```php
+add_action( 'wp_enqueue_scripts', function () {
+	if ( is_front_page() ) {
+		wp_frame_lite_use( 'swiper', 'glightbox' );
+	}
+} );
+```
+
+Вызывать нужно именно на `wp_enqueue_scripts`. Если дёрнуть функцию из шаблона, `wp_head` к тому моменту уже отработает, стили уедут в подвал и страница мигнёт нестилизованным блоком — при включённом `WP_DEBUG` функция об этом предупредит.
+
+Порядок вывода скриптов при этом не важен: инициализация в `main.js` ждёт `DOMContentLoaded`, к которому все классические скрипты документа уже выполнены.
+
+### Слайдер
+
+```html
+<div class="swiper js-slider" data-slider='{"loop":true,"slidesPerView":3}'>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">…</div>
+  </div>
+  <div class="swiper-pagination"></div>
+  <button class="swiper-button-prev" type="button"></button>
+  <button class="swiper-button-next" type="button"></button>
+</div>
+```
+
+`data-slider` необязателен и принимает любые параметры Swiper в виде JSON. Стрелки и пагинация подключаются сами, если их разметка лежит внутри слайдера — во вложенных слайдерах элементы управления ищутся только свои. Экземпляр доступен как `document.querySelector('.js-slider').swiper`.
+
+Подписи для скринридеров переведены на русский: Swiper по умолчанию ставит английские («Previous slide», «Go to slide 1»).
+
+Цвета стрелок и точек привязаны к токенам темы в `components/slider.css` через переменные `--swiper-*`, отдельно перекрашивать ничего не нужно.
+
+### Лайтбокс
+
+```html
+<a href="/full.jpg" class="glightbox" data-gallery="services">
+  <img src="/thumb.jpg" alt="" />
+</a>
+```
+
+Ссылки с одинаковым `data-gallery` листаются как одна галерея.
+
+Известная особенность: тип слайда GLightbox определяет **по расширению в URL**. Если ссылка ведёт на файл без расширения, библиотека клик не перехватит и браузер просто уйдёт по ссылке. Лечится явным типом:
+
+```html
+<a href="/download?id=12" class="glightbox" data-type="image"></a>
+```
+
+Если разметка на странице есть, а библиотека не подключена, модули пишут об этом предупреждение в консоль и молча выходят — вёрстка не ломается.
 
 ## Разработка
 
